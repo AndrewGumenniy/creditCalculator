@@ -1,0 +1,105 @@
+<html  ng-app="creditСalculator" lang="en"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta charset="UTF-8">
+    <title>Сredit Сalculator</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
+</head>
+<body ng-controller="calculatorСontroller">
+
+<div>
+
+<div class="content">
+
+    <div class="form-container">
+
+        <form class="form-horizontal" >
+            <fieldset>
+
+                <legend>Кредитный калькулятор</legend>
+                    
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="sum">Сумма кредита</label>
+                    <div class="col-md-4">
+                        <input id="sum" name="sum" type="text"  placeholder="" class="form-control 
+                        input-md" ng-keydown="checkInputForSum($event)" ng-model="sum" >
+
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="time">Срок кредита</label>
+                    <div class="col-md-4">
+                        <input id="time" name="time" type="text" placeholder="" class="form-control 
+                        input-md" ng-keydown="checkInputForTime($event)" ng-model="time" >
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="percent">Процентная ставка (%)</label>
+                    <div class="col-md-4">
+                        <input id="percent" name="textinput" type="text" placeholder="" class="form-control input-md" 
+						ng-keydown="checkInputForPercent($event)" ng-model="percent" >
+
+                    </div>
+                </div>
+         
+            </fieldset>
+        </form>
+
+      
+     
+    </div>
+
+    <div class="data-container">
+
+				<div class="info" ng-if="sum!=null&&sum!=''&& time!=null&&time!=''&& percent!=null&&percent!=''">
+					<b>Сумма кредита:</b> {{sum|number:2}}<br>
+					<b>Срок кредита:</b> {{time}}<br>
+					<b>Процентная ставка:</b> {{percent|number:2}}%<br>
+				</div>
+		
+        <table class="table table-striped text-center">
+            <thead>
+
+                <tr>
+                    <td>месяц</td>
+                    <td>погашение кредита</td>
+                    <td>погашение %</td>
+                    <td>общий взнос</td>
+                    <td>остаток кредита</td>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                <tr ng-if="sum!=null&&sum!=''&& time!=null&&time!=''&& percent!=null&&percent!=''"  
+                	ng-repeat="row in rowCollection">
+
+                    <td>{{row.month}}</td>
+                    <td>{{row.repaymentCredit|number:2}}</td>
+                    <td>{{row.repaymentPercent|number:2}}</td>
+                    <td>{{row.totalContribution|number:2}}</td>
+                    <td>{{row.creditBalance|number:2}}</td>
+
+                </tr>
+             			
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<script src="controller.js"></script>
+
+</body></html>
+
+
+
+
